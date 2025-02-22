@@ -31,14 +31,12 @@ BizFlowAI is a **SaaS platform** designed to help companies **plan new products/
 
 ## **Tech Stack**  
 - **Frontend**: Next.js (React framework for SSR + SEO).  
-- **Backend**: Node.js (Express.js for API).  
-- **Database**: PostgreSQL (structured data) + MongoDB (unstructured data).  
+- **Backend**: Node.js (Express.js for API).
 - **AI/ML**:  
-  - Scikit-learn (ML model for price prediction).  
-  - spaCy/NLTK (resume parsing).  
-  - Gemini API (email generation).  
-- **Cloud**: AWS/Azure (hosting, S3 for storage).  
-- **Auth**: NextAuth.js (OAuth 2.0/JWT).  
+  - llama-3.3-instruct (price prediction).  
+  - qwen-2.5-32b (resume parsing and analysis).  
+  - qwen-2.5-32b (email generation).  
+*All models used from the Groq free tier
 
 ---
 
