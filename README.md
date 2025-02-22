@@ -70,7 +70,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 ---
 
-## **Acknowledgments**  
+## **Acknowledgments.**  
 - **Gemini API** for dynamic email generation.  
 - **Scikit-learn** for ML-based price prediction.  
 - **Next.js** for seamless frontend development.  
