@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ProductForm() {
+  const router = useRouter();
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [fileName, setFileName] = useState("");
   const [companyHistoryFile, setCompanyHistoryFile] = useState("");
+  const [fileName, setFileName] = useState("");
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -52,76 +54,78 @@ export default function ProductForm() {
     console.log("Product Description:", productDescription);
     console.log("Uploaded File:", fileName);
     console.log("Company History File:", companyHistoryFile);
-    alert("Form Submitted!");
+    router.push("/analysis");
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-2xl mt-10">
+    <div className="w-4/5 mx-auto p-6 bg-[#DCE8F5] backdrop-blur-md border border-white/20 shadow-lg rounded-2xl mt-10">
       <form className="space-y-4" onSubmit={handleSubmit}>
         {/* Product Name Field */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">
-            Product/Feature Name
-          </label>
+        <div className="flex items-center space-x-4">
+          <label className="w-1/4 text-[#274C77] font-medium">Product/Feature Name</label>
           <input
             type="text"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
             placeholder="Enter product name"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-3/4 p-2 bg-[#F0F6FC] rounded-md text-black placeholder-gray-400"
             required
           />
         </div>
 
         {/* Product Description Field */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">
-            Enter Product Description
-          </label>
+        <div className="flex items-start space-x-4">
+          <label className="w-1/4 text-[#274C77] font-medium">Product Description</label>
           <textarea
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
             placeholder="Enter product description or upload a file"
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-3/4 h-[40vh] p-2 bg-[#F0F6FC] rounded-md text-black placeholder-gray-400 placeholder-[12px]"
             rows="4"
             required
           ></textarea>
         </div>
 
         {/* File Upload for Product Description */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">
-            Upload Product Description (.txt or .pdf)
-          </label>
-          <input
-            type="file"
-            accept=".txt,.pdf"
-            onChange={handleFileUpload}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none"
-          />
-          {fileName && <p className="text-gray-600 text-sm mt-2">Uploaded: {fileName}</p>}
+        <div className="flex items-center space-x-4">
+          <label className="w-1/4 text-[#274C77] font-medium">Upload Description</label>
+          <div className="relative w-3/4">
+            <input
+              type="file"
+              accept=".txt,.pdf"
+              onChange={handleFileUpload}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            />
+            <button type="button" className="bg-[#6096BA] text-white text-[12px] py-1 px-3 rounded-sm">
+              Choose File
+            </button>
+            <span className="ml-2 text-gray-400">{fileName ? fileName : "No file chosen"}</span>
+          </div>
         </div>
 
         {/* File Upload for Company History */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-1">
-            Add Company History (CSV or Excel)
-          </label>
-          <input
-            type="file"
-            accept=".csv,.xls,.xlsx"
-            onChange={handleCompanyHistoryUpload}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none"
-          />
-          {companyHistoryFile && (
-            <p className="text-gray-600 text-sm mt-2">Uploaded: {companyHistoryFile}</p>
-          )}
+        <div className="flex items-center space-x-4 mb-4">
+          <label className="w-1/4 text-[#274C77] font-medium">Company History</label>
+          <div className="relative w-3/4">
+            <input
+              type="file"
+              accept=".csv,.xls,.xlsx"
+              onChange={handleCompanyHistoryUpload}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            />
+            <button type="button" className="bg-[#6096BA] text-white text-[12px] py-1 px-3 rounded-sm">
+              Choose File
+            </button>
+            <span className="ml-2 text-gray-400">
+              {companyHistoryFile ? companyHistoryFile : "No file chosen"}
+            </span>
+          </div>
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          className="w-full bg-[#274C77] text-white py-2 rounded-lg hover:bg-blue-700 transition"
         >
           Submit
         </button>
