@@ -103,5 +103,5 @@ crew = Crew(
     verbose = True
 )
  
-result = crew. kickoff(inputs= {"topic" : topic})
+result = crew.kickoff(inputs= {"topic" : topic})
 print (result)
