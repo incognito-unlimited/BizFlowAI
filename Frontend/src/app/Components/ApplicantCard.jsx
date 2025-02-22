@@ -11,73 +11,61 @@ export default function ApplicantCard() {
       GraphQL: { years: 1, months: 6 },
     },
     salaryExpectation: "₹80,000/month",
-    matchPercentage: 85, // Percentage value (0 to 100)
+    matchPercentage: 85,
   };
 
-  // Function to format experience correctly
   const formatExperience = ({ years, months }) => {
     if (years >= 1) {
-      if (months > 6) return `${years}.5 years`; // Round to .5
-      return `${years} years`; // Keep whole number
+      if (months > 6) return `${years}.5 years`;
+      return `${years} years`;
     }
-    return `${months} months`; // Less than 1 year, show months
+    return `${months} months`;
   };
 
-  // Circle progress settings
-  const radius = 40; // Increased radius for better padding
+  const radius = 40;
   const circumference = 2 * Math.PI * radius;
   const progress = (applicant.matchPercentage / 100) * circumference;
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white shadow-lg rounded-2xl flex justify-between items-center mt-10">
+    <div className="w-full bg-[#C0D1E4] mb-10 border border-[#C0D1E4] shadow-lg rounded-2xl p-6 flex justify-between items-center">
+      
       {/* Left Section */}
       <div>
-        <h2 className="text-xl font-bold text-gray-800 mb-2">{applicant.name}</h2>
+        <h2 className="text-2xl font-semibold text-[#1C2B4B] mb-3">{applicant.name}</h2>
 
-        {/* Experience Section - Styled Like Tech Stack */}
-        <h3 className="text-gray-600 font-semibold mb-2">Experience:</h3>
-        <div className="flex flex-wrap gap-3 mb-3">
+        <h3 className="text-[#336699] font-medium mb-2">Experience:</h3>
+        <div className="flex flex-wrap gap-2 mb-4">
           {Object.entries(applicant.experience).map(([tech, duration], index) => (
-            <div key={index} className="px-4 py-2 bg-blue-100 text-blue-800 font-semibold rounded-lg shadow-md">
+            <div key={index} className="px-3 py-1 bg-[#4A81C4] text-white font-medium rounded-md">
               {tech}: {formatExperience(duration)}
             </div>
           ))}
         </div>
 
-        {/* Salary Expectation */}
-        <p className="text-gray-600 font-semibold mb-3">
-          Salary Expectation: <span className="text-gray-800 font-bold">{applicant.salaryExpectation}</span>
+        <p className="text-gray-600 font-medium mb-3">
+          Salary Expectation: <span className="text-[#1C2B4B] font-semibold">{applicant.salaryExpectation}</span>
         </p>
 
         {/* Buttons */}
         <div className="flex space-x-3">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+          <button className="bg-[#4A81C4] text-white px-4 py-2 rounded-lg hover:bg-[#3B6CA8] transition">
             View Resume
           </button>
-          <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+          <button className="bg-[#3BAA66] text-white px-4 py-2 rounded-lg hover:bg-[#2F8A52] transition">
             Book Interview
           </button>
         </div>
       </div>
 
-      {/* Right Section - Full Circular Progress Bar with More Padding */}
-      <div className="relative w-28 h-28"> {/* Increased width & height for padding */}
-        <svg className="w-full h-full" viewBox="0 0 120 120"> {/* Increased viewBox for better spacing */}
-          {/* Background Circle */}
+      {/* Right Section - Circular Progress */}
+      <div className="relative w-24 h-24">
+        <svg className="w-full h-full" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r={radius} stroke="#A6B8CC" strokeWidth="8" fill="none" />
           <circle
             cx="60"
             cy="60"
             r={radius}
-            stroke="#e5e7eb"
-            strokeWidth="8"
-            fill="none"
-          />
-          {/* Progress Circle */}
-          <circle
-            cx="60"
-            cy="60"
-            r={radius}
-            stroke="blue"
+            stroke="#4A81C4"
             strokeWidth="8"
             fill="none"
             strokeDasharray={circumference}
@@ -86,11 +74,11 @@ export default function ApplicantCard() {
             transform="rotate(-90 60 60)"
           />
         </svg>
-        {/* Percentage Text in the Center */}
-        <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold text-blue-800">
+        <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold text-[#4A81C4]">
           {applicant.matchPercentage}%
         </span>
       </div>
+
     </div>
   );
 }
