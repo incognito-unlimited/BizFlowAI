@@ -1,10 +1,10 @@
 import os
-import pandas as pd
-from groq import Groq
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
+import pandas as pd
+from groq import Groq
 
 # Load API key from environment variables for security
 api_key = os.getenv("GROQ_API_KEY")
@@ -14,32 +14,32 @@ if not api_key:
 # Initialize Groq client
 client = Groq(api_key=api_key)
 
+# Load historical data from a CSV file
+historical_data = pd.read_csv("soapnutshistory.csv")
+
+# Define the prompt for price prediction
+prompt = """
+You are an AI agent trained to predict the ideal price for a product tomorrow using historical data.
+The goal is to maximize sales while balancing exploration (testing new price points) and exploitation (leveraging historical data).
+
+Historical Data:
+{historical_data}
+
+Current Price: ${current_price}
+
+Task:
+1. Predict the ideal price for tomorrow.
+2. Ensure the price is higher than the historical median price to encourage exploration.
+3. Maximize sales and conversion rates (organic and ad).
+4. Avoid getting stuck in historical median values.
+
+Output Format:
+- Only provide the predicted price in the format: $<predicted_price>
+- Do not include any additional text, explanations, or reasoning.
+"""
+
 # Function to predict the ideal price
 def predict_ideal_price(current_price):
-    # Load historical data from a CSV file
-    historical_data = pd.read_csv("data/soapnutshistory.csv")
-
-    # Define the prompt for price prediction
-    prompt = """
-    You are an AI agent trained to predict the ideal price for a product tomorrow using historical data.
-    The goal is to maximize sales while balancing exploration (testing new price points) and exploitation (leveraging historical data).
-
-    Historical Data:
-    {historical_data}
-
-    Current Price: ${current_price}
-
-    Task:
-    1. Predict the ideal price for tomorrow.
-    2. Ensure the price is higher than the historical median price to encourage exploration.
-    3. Maximize sales and conversion rates (organic and ad).
-    4. Avoid getting stuck in historical median values.
-
-    Output Format:
-    - Only provide the predicted price in the format: $<predicted_price>
-    - Do not include any additional text, explanations, or reasoning.
-    """
-
     # Prepare the historical data for the prompt
     historical_data_str = historical_data.to_string()
 
@@ -63,3 +63,8 @@ def predict_ideal_price(current_price):
     # Extract and return the predicted price
     prediction = completion.choices[0].message.content.strip()
     return prediction
+
+# Example usage
+current_price = 14.0  # Replace with the actual current price
+prediction = predict_ideal_price(current_price)
+print("Predicted Price:", prediction)
