@@ -1,19 +1,6 @@
 "use client";
 
-export default function ApplicantCard() {
-  const applicant = {
-    name: "John Doe",
-    experience: {
-      React: { years: 2, months: 7 },
-      "Next.js": { years: 1, months: 4 },
-      Node: { years: 0, months: 8 },
-      MongoDB: { years: 3, months: 2 },
-      GraphQL: { years: 1, months: 6 },
-    },
-    salaryExpectation: "₹80,000/month",
-    matchPercentage: 85,
-  };
-
+export default function ApplicantCard({ applicant }) {
   const formatExperience = ({ years, months }) => {
     if (years >= 1) {
       if (months > 6) return `${years}.5 years`;
@@ -28,7 +15,6 @@ export default function ApplicantCard() {
 
   return (
     <div className="w-full bg-[#C0D1E4] mb-10 border border-[#C0D1E4] shadow-lg rounded-2xl p-6 flex justify-between items-center">
-      
       {/* Left Section */}
       <div>
         <h2 className="text-2xl font-semibold text-[#1C2B4B] mb-3">{applicant.name}</h2>
@@ -78,7 +64,7 @@ export default function ApplicantCard() {
           {applicant.matchPercentage}%
         </span>
       </div>
-
     </div>
   );
 }
+

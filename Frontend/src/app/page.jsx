@@ -9,9 +9,8 @@ export default function Home() {
   return (
     <div>
     <div className="home_container p-10">
-    <h1 className="text-center text-3xl font-montserrat font-bold text-[#1B1F3B]">New Product Analysis</h1>
+    <h1 className="text-center text-3xl font-montserrat font-bold text-white/70">New Product Analysis</h1>
     <ProductForm/>
-    {/* <AnalysisContainer/> */}
     </div>
     </div>
   );

@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import TechStack from "./Components/TechStack";
 import PaidFeature from "./Components/PaidFeatures";
@@ -10,6 +8,15 @@ export default function AnalysisContainer() {
     const router = useRouter();
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
     const [files, setFiles] = useState([]);
+    const [productName, setProductName] = useState("");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get("productName");
+        if (name) {
+            setProductName(name);
+        }
+    }, []);
 
     const handleFileUpload = (event) => {
         if (event.target.files) {
@@ -48,10 +55,12 @@ export default function AnalysisContainer() {
 
     return (
         <div className="mb-10">
-            <h1 className="text-4xl font-semibold mt-10 text-center mb-6">
-                Product Name
+            <h1 className="text-4xl text-white/70 font-semibold mt-10 text-center mb-6">
+                {productName || "Product Name"}
             </h1>
-            <div className="w-3/4 mx-auto border border-white/20 p-6 shadow-lg rounded-2xl mt-10 bg-[#DCE8F5] flex flex-col">
+            <div className="w-3/6 mx-auto p-6 mt-10 shadow-lg rounded-2xl 
+                bg-white/10 border border-white/20 
+                backdrop-blur-lg backdrop-saturate-150">
                 {/* Main Content */}
                 <div className="flex-grow">
                     <PaidFeature />
@@ -63,7 +72,7 @@ export default function AnalysisContainer() {
                 <div className="mt-6">
                     <button
                         onClick={() => setIsOverlayOpen(true)}
-                        className="w-full bg-[#274C77] text-white font-bold py-3 px-4 rounded-lg text-lg hover:bg-blue-700 transition"
+                        className="w-full bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-lg hover:bg-blue-700 transition"
                     >
                         Start Hiring
                     </button>
@@ -79,7 +88,7 @@ export default function AnalysisContainer() {
                         onDragOver={(e) => e.preventDefault()}
                     >
                         <h2 className="text-2xl font-semibold mb-4 text-center text-[#274C77]">
-                            Upload PDF or DOC Files
+                            Upload All Resumes
                         </h2>
                         <p className="text-gray-600 text-center mb-4">
                             Drag & drop or select files to upload (PDFs, Docs only)
