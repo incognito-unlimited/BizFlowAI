@@ -24,9 +24,10 @@ export default function ProductForm() {
 
       if (file.type === "text/plain") {
         reader.readAsText(file);
-      } else if (file.type === "application/pdf") {
-        alert("PDF preview is not available, but you can submit it.");
-      }
+      } 
+      // else if (file.type === "application/pdf") {
+      //   alert("PDF preview is not available, but you can submit it.");
+      // }
     } else {
       alert("Only .txt and .pdf files are allowed.");
     }
@@ -54,33 +55,34 @@ export default function ProductForm() {
     console.log("Product Description:", productDescription);
     console.log("Uploaded File:", fileName);
     console.log("Company History File:", companyHistoryFile);
-    router.push("/analysis");
+    router.push(`/analysis?productName=${encodeURIComponent(productName)}`);
   };
+  
 
   return (
-    <div className="w-4/5 mx-auto p-6 bg-[#DCE8F5] backdrop-blur-md border border-white/20 shadow-lg rounded-2xl mt-10">
-      <form className="space-y-4" onSubmit={handleSubmit}>
+<div className="w-4/5 mx-auto p-6 bg-white/10 backdrop-blur-lg  border-white/30 shadow-lg rounded-2xl mt-10">
+<form className="space-y-4" onSubmit={handleSubmit}>
         {/* Product Name Field */}
         <div className="flex items-center space-x-4">
-          <label className="w-1/4 text-[#274C77] font-medium">Product/Feature Name</label>
+          <label className="w-1/4 text-[#ffffff] font-medium">Product/Feature Name</label>
           <input
             type="text"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
             placeholder="Enter product name"
-            className="w-3/4 p-2 bg-[#F0F6FC] rounded-md text-black placeholder-gray-400"
+            className="w-3/4 p-2 bg-black/20 rounded-md text-white placeholder-gray-400"
             required
           />
         </div>
 
         {/* Product Description Field */}
         <div className="flex items-start space-x-4">
-          <label className="w-1/4 text-[#274C77] font-medium">Product Description</label>
+          <label className="w-1/4 text-white font-medium">Product Description</label>
           <textarea
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
             placeholder="Enter product description or upload a file"
-            className="w-3/4 h-[40vh] p-2 bg-[#F0F6FC] rounded-md text-black placeholder-gray-400 placeholder-[12px]"
+            className="w-3/4 h-[40vh] p-2 bg-black/20 rounded-md text-white placeholder-gray-400 placeholder-[12px]"
             rows="4"
             required
           ></textarea>
@@ -88,7 +90,7 @@ export default function ProductForm() {
 
         {/* File Upload for Product Description */}
         <div className="flex items-center space-x-4">
-          <label className="w-1/4 text-[#274C77] font-medium">Upload Description</label>
+          <label className="w-1/4 text-[#ffffff] font-medium">Upload Description</label>
           <div className="relative w-3/4">
             <input
               type="file"
@@ -96,7 +98,7 @@ export default function ProductForm() {
               onChange={handleFileUpload}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
-            <button type="button" className="bg-[#6096BA] text-white text-[12px] py-1 px-3 rounded-sm">
+            <button type="button" className="bg-white/50 text-black text-[12px] py-1 px-3 rounded-sm">
               Choose File
             </button>
             <span className="ml-2 text-gray-400">{fileName ? fileName : "No file chosen"}</span>
@@ -105,7 +107,7 @@ export default function ProductForm() {
 
         {/* File Upload for Company History */}
         <div className="flex items-center space-x-4 mb-4">
-          <label className="w-1/4 text-[#274C77] font-medium">Company History</label>
+          <label className="w-1/4 text-[#ffffff] font-medium">Company History</label>
           <div className="relative w-3/4">
             <input
               type="file"
@@ -113,7 +115,7 @@ export default function ProductForm() {
               onChange={handleCompanyHistoryUpload}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
-            <button type="button" className="bg-[#6096BA] text-white text-[12px] py-1 px-3 rounded-sm">
+            <button type="button" className="bg-white/50 text-black text-[12px] py-1 px-3 rounded-sm">
               Choose File
             </button>
             <span className="ml-2 text-gray-400">
@@ -123,12 +125,14 @@ export default function ProductForm() {
         </div>
 
         {/* Submit Button */}
+        <div className="flex justify-end">
         <button
           type="submit"
-          className="w-full bg-[#274C77] text-white py-2 rounded-lg hover:bg-blue-700 transition"
+          className="w-fit px-10 bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-700 transition"
         >
           Submit
         </button>
+        </div>
       </form>
     </div>
   );
