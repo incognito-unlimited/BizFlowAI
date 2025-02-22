@@ -80,7 +80,7 @@ export default function ProductForm() {
             value={productDescription}
             onChange={(e) => setProductDescription(e.target.value)}
             placeholder="Enter product description or upload a file"
-            className="w-3/4 h-[40vh] p-2 bg-[#F0F6FC] rounded-md text-black placeholder-gray-400"
+            className="w-3/4 h-[40vh] p-2 bg-[#F0F6FC] rounded-md text-black placeholder-gray-400 placeholder-[12px]"
             rows="4"
             required
           ></textarea>
